@@ -32,10 +32,11 @@ function AppInner() {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>("pc")
   const [selectedSort, setSelectedSort] = useState<Sort>("alphabetical")
   const [selectedPage, setSelectedPage] = useState<Page>("lobby-grid")
-  const [selectedTheme, setSelectedTheme] = useState<Theme>("dark")
+  const [selectedTheme, setSelectedTheme] = useState<Theme>((localStorage.getItem("theme") == "light") ? "light" : "dark")
   let [selectedLobby, setSelectedLobby] = useState<Lobby|null>(null)
 
   document.body.dataset.theme = selectedTheme
+  localStorage.setItem("theme", selectedTheme)
 
   function joinLobby(lobby: Lobby, team?: number) {
     const gamemode = gamemodeInfo[lobby.gamemode]
