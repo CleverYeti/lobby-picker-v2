@@ -26,6 +26,7 @@ export function GraphsPage({
     const [graphData, setGraphData] = useState<GetGraphEndpointResponse | null | "error">(null);
 
     useEffect(() => {
+        if (!isActive) return
         let ignore = false;
         ;(async () => {
             let params: GetGraphEndpointParams = {
@@ -93,7 +94,7 @@ export function GraphsPage({
             }
         })()
         return () => {ignore = true};
-    }, [selectedRegion, selectedGamemode, selectedTimeSpan, selectedPlatform])
+    }, [selectedRegion, selectedGamemode, selectedTimeSpan, selectedPlatform, isActive])
 
 
     return (

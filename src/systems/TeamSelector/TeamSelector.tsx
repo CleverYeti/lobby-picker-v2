@@ -2,6 +2,7 @@ import { useState } from "react";
 import { gamemodeInfo } from "../../gamemodeInfo";
 import { Lobby } from "../LBDataSystem/LBDataContext";
 import "./TeamSelector.css"
+import { publicFileRoot } from "../../config";
 
 export function TeamSelector({
     selectedLobby,
@@ -33,13 +34,13 @@ export function TeamSelector({
             </div>
             <div id="teamGrid">
                 {gamemodeInfo[animatingLobby?.gamemode ?? ""]?.teamCount == 4 ? (<>
-                    <div className="team" data-team-id={0} data-team-position="top-left"     onClick={() => selectedLobby != null && joinLobby(selectedLobby, 0)}> <img src="/assets/team-arrow.svg"/> </div>
-                    <div className="team" data-team-id={2} data-team-position="top-right"    onClick={() => selectedLobby != null && joinLobby(selectedLobby, 2)}> <img src="/assets/team-arrow.svg"/> </div>
-                    <div className="team" data-team-id={3} data-team-position="bottom-left"  onClick={() => selectedLobby != null && joinLobby(selectedLobby, 3)}> <img src="/assets/team-arrow.svg"/> </div>
-                    <div className="team" data-team-id={1} data-team-position="bottom-right" onClick={() => selectedLobby != null && joinLobby(selectedLobby, 1)}> <img src="/assets/team-arrow.svg"/> </div>
+                    <div className="team" data-team-id={0} data-team-position="top-left"     onClick={() => selectedLobby != null && joinLobby(selectedLobby, 0)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
+                    <div className="team" data-team-id={2} data-team-position="top-right"    onClick={() => selectedLobby != null && joinLobby(selectedLobby, 2)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
+                    <div className="team" data-team-id={3} data-team-position="bottom-left"  onClick={() => selectedLobby != null && joinLobby(selectedLobby, 3)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
+                    <div className="team" data-team-id={1} data-team-position="bottom-right" onClick={() => selectedLobby != null && joinLobby(selectedLobby, 1)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
                 </>):(<>
-                    <div className="team" data-team-id={0} data-team-position="left"  onClick={() => selectedLobby != null && joinLobby(selectedLobby, 0)}> <img src="/assets/team-arrow.svg"/> </div>
-                    <div className="team" data-team-id={1} data-team-position="right" onClick={() => selectedLobby != null && joinLobby(selectedLobby, 1)}> <img src="/assets/team-arrow.svg"/> </div>
+                    <div className="team" data-team-id={0} data-team-position="left"  onClick={() => selectedLobby != null && joinLobby(selectedLobby, 0)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
+                    <div className="team" data-team-id={1} data-team-position="right" onClick={() => selectedLobby != null && joinLobby(selectedLobby, 1)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
                 </>)}
             </div>
         </div>

@@ -1,5 +1,3 @@
-import { match } from "assert"
-
 export enum GamemodeIDs {
   unknown = 0,
   ffa = 1,

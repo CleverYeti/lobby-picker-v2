@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  font-size: calc(28 * min(100vh / 1080, 100vw / 1300));
+  font-size: calc(30 * min(100vh / 1080, 100vw / 1300));
 }
 
 *, *:before, *:after {

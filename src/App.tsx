@@ -7,7 +7,7 @@ import { GraphsPage } from "./GraphsPage/GraphsPage"
 import { MainPage } from "./MainPage/MainPage"
 import { TeamSelector } from "./systems/TeamSelector/TeamSelector"
 import { gamemodeInfo } from "./gamemodeInfo"
-import { baseGameURL } from "./config"
+import { publicFileRoot, baseGameURL } from "./config"
 
 export function App() {
   return <>
@@ -69,13 +69,13 @@ function AppInner() {
     <div id="maingrid" data-page={selectedPage}>
       <div id="topbar">
         <IconSelector
-          options={platforms.map(platform => ({key: platform, iconURL: `/assets/icons/platform-${platform}.svg`}))}
+          options={platforms.map(platform => ({key: platform, iconURL: `${publicFileRoot}/assets/icons/platform-${platform}.svg`}))}
           activeOption={selectedPlatform}
           setActiveOption={setSelectedPlatform}
         />
         <div className="selector-splitter"></div>
         <IconSelector
-          options={sorts.map(sort => ({key: sort, iconURL: `/assets/icons/sort-${sort}.svg`}))}
+          options={sorts.map(sort => ({key: sort, iconURL: `${publicFileRoot}/assets/icons/sort-${sort}.svg`}))}
           activeOption={selectedSort}
           setActiveOption={setSelectedSort}
         />
@@ -83,13 +83,13 @@ function AppInner() {
           <NumberCounter value={playerCount}/> Total Players Online
         </div>
         <IconSelector
-          options={pages.map(page => ({key: page, iconURL: `/assets/icons/page-${page}.svg`}))}
+          options={pages.map(page => ({key: page, iconURL: `${publicFileRoot}/assets/icons/page-${page}.svg`}))}
           activeOption={selectedPage}
           setActiveOption={setSelectedPage}
         />
         <div className="selector-splitter"></div>
         <IconSelector
-          options={themes.map(theme => ({key: theme, iconURL: `/assets/icons/theme-${theme}.svg`}))}
+          options={themes.map(theme => ({key: theme, iconURL: `${publicFileRoot}/assets/icons/theme-${theme}.svg`}))}
           activeOption={selectedTheme}
           setActiveOption={setSelectedTheme}
         />
