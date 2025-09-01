@@ -7,7 +7,7 @@ import { GraphsPage } from "./GraphsPage/GraphsPage"
 import { MainPage } from "./MainPage/MainPage"
 import { TeamSelector } from "./systems/TeamSelector/TeamSelector"
 import { gamemodeInfo } from "./gamemodeInfo"
-import { publicFileRoot, baseGameURL } from "./config"
+import { publicFileRoot, baseGameURL, baseMobileGameURL } from "./config"
 
 export function App() {
   return <>
@@ -43,7 +43,7 @@ function AppInner() {
       setSelectedLobby(lobby)
     } else {
       // main format
-      const link =  baseGameURL + "?" + new URLSearchParams({
+      const link = (lobby.platform == "mobile" ? baseMobileGameURL : baseGameURL) + "?" + new URLSearchParams({
         s: lobby.ip,
         g: lobby.gamemode,
         ...(team != null ? {l: `0x${team}`} : {})
