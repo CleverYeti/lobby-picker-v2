@@ -42,6 +42,14 @@ function AppInner() {
     if ((gamemode?.teamCount ?? 0) > 0 && team == undefined) {
       setSelectedLobby(lobby)
     } else {
+      // main format
+      const link =  baseGameURL + "?" + new URLSearchParams({
+        s: lobby.ip,
+        g: lobby.gamemode,
+        ...(team != null ? {l: `0x${team}`} : {})
+      })
+      window.open(link, "_blank")
+      /* beta format
       const decodedLobby = [
         lobby.region,
         lobby.gamemode,
@@ -53,6 +61,7 @@ function AppInner() {
       const encodedLobby = encodeURI(decodedLobby.join("_"))
       const link =  baseGameURL + "?lobby=" + encodedLobby
       window.open(link, "_blank")
+      */
     }
   }
 
@@ -88,6 +97,7 @@ function AppInner() {
       <GraphsPage
         selectedPlatform={selectedPlatform}
         isActive={selectedPage == "graphs"}
+        selectedTheme={selectedTheme}
       />
       <MainPage
         selectedPlatform={selectedPlatform}
