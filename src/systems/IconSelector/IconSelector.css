@@ -1,0 +1,50 @@
+.icon-selector {
+  display: flex;
+  position: relative;
+}
+.icon-selector > .option {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--topbar-text-color);
+  display: grid;
+  place-content: center;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  opacity: 0.75;
+  --ionicon-stroke-width: 48px;
+  cursor: pointer;
+  transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.icon-selector > .option[data-is-active="true"] {
+  opacity: 0.875;
+}
+
+
+.icon-selector::after {
+  height: 2.5rem;
+  width: 2.5rem;
+  position: absolute;
+  inset: 0 auto auto 0;
+  content: "";
+  left: calc(2.5rem * var(--selected-index));
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--topbar-text-color), transparent 85%);
+  pointer-events: none;
+  transition:
+    inset 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.icon-selector[data-is-animating="true"]::after {
+  transform: scale(0.75);
+}
+
+
+.icon-selector > .option > img {
+  width: 2rem;
+  height: 2rem;
+}
+
+body[data-theme="light"] .icon-selector > .option > img {
+  filter: invert();
+  opacity: 0.65;
+}
