@@ -105,11 +105,11 @@ export function GraphsPage({
                 </> : <>
                     <ResponsiveLineCanvas /* or LineCanvas for fixed dimensions */
                         data={[...graphData.lines.map((line, index) => {
-                            const outputLine: {id: number, data: Array<{x: number, y: number|null}>} = {
+                            const outputLine: {id: string, data: Array<{x: number, y: number|null}>} = {
                                 id: ([
-                                    line.gamemodeID != GamemodeIDs.unknown ? gamemodes[line.gamemodeID]?.shortName : null,
-                                    line.regionID != RegionIDs.unknown ? regions[line.regionID]?.shortName : null,
-                                ].filter(line => line != null).join(" ")) as any,
+                                    line.gamemodeID != GamemodeIDs.unknown ? gamemodes[line.gamemodeID]?.shortName : "ALL",
+                                    line.regionID != RegionIDs.unknown ? regions[line.regionID]?.shortName : "ALL",
+                                ].filter(line => line != null).join(" ")),
                                 data: []
                             }
                             for (let point of line.points) {
@@ -119,11 +119,15 @@ export function GraphsPage({
                             return outputLine
                         })]}
                         margin={{ top: 30, right: graphData.lines.length > 1 ? 160 : 50, bottom: 60, left: 50 }}
-                        xScale={{ type: 'time', format: 'native' }}
+                        xScale={{
+                            type: 'time',
+                            format: 'native',
+                            min: new Date(graphData.startTime),
+                            max: new Date(graphData.endTime),
+                        }}
                         yScale={{ type: 'linear', min: 0, max: graphData.maxY }}
-                        axisRight={{ tickValues: [0, 500, 1000, 1500, 2000, 2500], format: '.2s' }}
                         axisBottom={{
-                            format: (value: Date) => value.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                            format: (value: Date) => (graphData.endTime - graphData.startTime > 1000 * 60 * 60 * 24) ? value.toLocaleDateString() : value.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) ,
                             tickRotation: -45,
                         }}
                         colors={selectedTheme == "dark" ? [
