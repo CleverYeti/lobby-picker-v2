@@ -107,9 +107,9 @@ export function GraphsPage({
                         data={[...graphData.lines.map((line, index) => {
                             const outputLine: {id: string, data: Array<{x: number, y: number|null}>} = {
                                 id: ([
-                                    line.gamemodeID != GamemodeIDs.unknown ? gamemodes[line.gamemodeID]?.shortName : "ALL",
-                                    line.regionID != RegionIDs.unknown ? regions[line.regionID]?.shortName : "ALL",
-                                ].filter(line => line != null).join(" ")),
+                                    line.regionID != RegionIDs.unknown ? regions[line.regionID]?.shortName : null,
+                                    line.gamemodeID != GamemodeIDs.unknown ? gamemodes[line.gamemodeID]?.shortName : null,
+                                ].filter(line => line != null).join(" ") || "All"),
                                 data: []
                             }
                             for (let point of line.points) {
