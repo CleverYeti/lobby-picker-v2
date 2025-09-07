@@ -5,7 +5,7 @@
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr auto;
   gap: 1rem;
   transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -22,9 +22,6 @@
   border-radius: 0.75rem;
   grid-column: span 2;
   background: var(--color);
-}
-.gamemode {
-  grid-row: span 2;
 }
 .gamemode:after, .settings:after {
   position: absolute;
@@ -74,4 +71,67 @@
   font-weight: 600;
   color: #000000aa;
   margin-top: -0.25rem;
+}
+
+
+#gamemode-grid > .partner-section {
+  margin-top: -0.5rem;
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--topbar-text-color);
+  margin-bottom: 0.5rem;
+}
+
+
+#gamemode-grid > .partner-section > .partners-title {
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 0.5rem;
+  opacity: 0.5;
+}
+
+#gamemode-grid > .partner-section > .partner-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+#gamemode-grid > .partner-section > .partner-links > .partner-banner {
+  border-radius: 0.75rem;
+  width: 100%;
+  aspect-ratio: 3/1.125;
+  background: #191919;
+  transition: transform 300ms ease;
+  overflow: hidden;
+  position: relative;
+}
+#gamemode-grid > .partner-section > .partner-links > .partner-banner:hover {
+  transform: scale(1.05);
+}
+
+#gamemode-grid > .partner-section > .partner-links > .partner-banner > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  transition: transform 300ms ease;
+}
+
+#gamemode-grid > .partner-section > .partner-links > .partner-banner > .placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-align: center;
+  opacity: 0.4;
+}
+
+#gamemode-grid > .partner-section > .partner-links > .partner-banner:hover > img {
+  transform: scale(1.025);
 }

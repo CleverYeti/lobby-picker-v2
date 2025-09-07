@@ -46,6 +46,20 @@ export function MainPage({
                     </div>
                 </>)
             })}
+            <div className="partner-section">
+                <div className="partners-title">Check out our other projects:</div>
+                <div className="partner-links">
+                    <a className="partner-banner" href="https://diepeditor.io" target="_blank">
+                        <img src="/assets/partners/diepEditorBanner.png" alt="" />
+                    </a>
+                    <a className="partner-banner" href="https://diepWiki.io" target="_blank">
+                        <img src="/assets/partners/diepWikiBanner.png" alt="" />
+                    </a>
+                    <div className="partner-banner">
+                        <div className="placeholder">Coming soon!</div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

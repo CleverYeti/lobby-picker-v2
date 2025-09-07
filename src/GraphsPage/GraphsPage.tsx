@@ -8,6 +8,7 @@ import { GamemodeIDs, GamemodeNameIDs, gamemodes } from "../DataTypes/Gamemodes"
 import { ResponsiveLineCanvas } from "@nivo/line";
 import { graphAPIURL } from "../config";
 import { Theme } from "../App";
+import "./GraphsPage.css"
 
 export function GraphsPage({
     selectedPlatform,
