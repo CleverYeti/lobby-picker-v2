@@ -46,6 +46,7 @@ export function MainPage({
                     </div>
                 </>)
             })}
+            {/*
             <div className="partner-section">
                 <div className="partners-title">Check out our other projects:</div>
                 <div className="partner-links">
@@ -60,6 +61,7 @@ export function MainPage({
                     </div>
                 </div>
             </div>
+            */}
         </div>
     )
 }
