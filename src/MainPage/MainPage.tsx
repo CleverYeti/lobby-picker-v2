@@ -50,10 +50,10 @@ export function MainPage({
                 <div className="partners-title">Check out our other projects:</div>
                 <div className="partner-links">
                     <a className="partner-banner" href="https://diepeditor.io" target="_blank">
-                        <img src="/assets/partners/diepEditorBanner.png" alt="" />
+                        <img src="https://dieplobbypicker.io/assets/partners/diepEditorBanner.png" alt="" />
                     </a>
                     <a className="partner-banner" href="https://diepWiki.io" target="_blank">
-                        <img src="/assets/partners/diepWikiBanner.png" alt="" />
+                        <img src="https://dieplobbypicker.io/assets/partners/diepWikiBanner.png" alt="" />
                     </a>
                     <div className="partner-banner">
                         <div className="placeholder">Coming soon!</div>
