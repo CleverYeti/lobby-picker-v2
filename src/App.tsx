@@ -58,7 +58,8 @@ function AppInner() {
         regionID: getRegionID(lobby.region),
         gamemodeNameID: getGamemodeNameID(lobby.gamemodeName),
         environmentID: getEnvironmentID(lobby.platform),
-        teamID: team
+        teamID: team,
+        isCodepen: window.location.href.includes("cdpn") || window.location.href.includes("codepen")
       }
       ;(async () => {
         try {

@@ -8,4 +8,5 @@ export interface PushPlayerStatEndpointParams {
   gamemodeNameID?: GamemodeNameIDs, // 0 = all combined
   environmentID?: EnvironmentIDs // 0 = all combined
   teamID?: number // -1 = none
+  isCodepen?: boolean
 }
