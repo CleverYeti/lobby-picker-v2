@@ -7,7 +7,11 @@ import { GraphsPage } from "./GraphsPage/GraphsPage"
 import { MainPage } from "./MainPage/MainPage"
 import { TeamSelector } from "./systems/TeamSelector/TeamSelector"
 import { gamemodeInfo } from "./gamemodeInfo"
-import { publicFileRoot, baseGameURL, baseMobileGameURL } from "./config"
+import { publicFileRoot, baseGameURL, baseMobileGameURL, pushStatAPIURL } from "./config"
+import { PushPlayerStatEndpointParams } from "./DataTypes/pushPlayerStatTypes"
+import { getGamemodeID, getGamemodeNameID } from "./DataTypes/Gamemodes"
+import { getRegionID } from "./DataTypes/Regions"
+import { getEnvironmentID } from "./DataTypes/Environments"
 
 export function App() {
   return <>
@@ -49,6 +53,27 @@ function AppInner() {
         g: lobby.gamemode,
         ...(team != null ? {l: `0x${team}`} : {})
       })
+      const params: PushPlayerStatEndpointParams = {
+        gamemodeID: getGamemodeID(lobby.gamemode),
+        regionID: getRegionID(lobby.region),
+        gamemodeNameID: getGamemodeNameID(lobby.gamemodeName),
+        environmentID: getEnvironmentID(lobby.platform),
+        teamID: team
+      }
+      ;(async () => {
+        try {
+          const response = await fetch(pushStatAPIURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(params)
+          })
+          if (!response.ok) throw new Error();
+        } catch (error) {
+          console.error("failed to push to stats", error)
+        }
+      })()
       window.open(link, "_blank")
       /* beta format
       const decodedLobby = [
