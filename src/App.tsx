@@ -37,7 +37,7 @@ function AppInner() {
   const [selectedSort, setSelectedSort] = useState<Sort>("alphabetical")
   const [selectedPage, setSelectedPage] = useState<Page>("lobby-grid")
   const [selectedTheme, setSelectedTheme] = useState<Theme>((localStorage.getItem("theme") == "light") ? "light" : "dark")
-  let [selectedLobby, setSelectedLobby] = useState<Lobby|null>(null)
+  const [selectedLobby, setSelectedLobby] = useState<Lobby|null>(null)
 
   document.body.dataset.theme = selectedTheme
   localStorage.setItem("theme", selectedTheme)
@@ -66,7 +66,7 @@ function AppInner() {
           const response = await fetch(pushStatAPIURL, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+              "Content-Type": "application/json"
             },
             body: JSON.stringify(params)
           })

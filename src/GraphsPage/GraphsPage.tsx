@@ -87,7 +87,6 @@ export function GraphsPage({
                 if (ignore) return;
                 const newData = await response.json()
                 if (ignore) return;
-                console.log(newData)
                 setGraphData(newData);
             } catch (error) {
                 if (ignore) return;

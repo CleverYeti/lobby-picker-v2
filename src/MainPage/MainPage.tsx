@@ -13,7 +13,7 @@ export function MainPage({
 }: {
     selectedPlatform: Platform,
     selectedSort: Sort,
-    isActive: Boolean,
+    isActive: boolean,
     joinLobby: (lobby: Lobby, team?: number) => void
 }) {
     const { availableLobbies } = useLBData()
@@ -46,7 +46,6 @@ export function MainPage({
                     </div>
                 </>)
             })}
-            {/*
             <div className="partner-section">
                 <div className="partners-title">Check out our other projects:</div>
                 <div className="partner-links">
@@ -56,12 +55,11 @@ export function MainPage({
                     <a className="partner-banner" href="https://diepWiki.io" target="_blank">
                         <img src="https://dieplobbypicker.io/assets/partners/diepWikiBanner.png" alt="" />
                     </a>
-                    <a className="partner-banner" href="" target="_blank">
+                    <a className="partner-banner" href="https://discord.gg/xF4ZmX3XnV" target="_blank">
                         <img src="/assets/partners/diepVerseBanner.png" alt="" />
                     </a>
                 </div>
             </div>
-            */}
         </div>
     )
 }
