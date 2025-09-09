@@ -56,7 +56,7 @@ export function MainPage({
                         <img src="https://dieplobbypicker.io/assets/partners/diepWikiBanner.png" alt="" />
                     </a>
                     <a className="partner-banner" href="https://discord.gg/xF4ZmX3XnV" target="_blank">
-                        <img src="/assets/partners/diepVerseBanner.png" alt="" />
+                        <img src="https://dieplobbypicker.io/assets/partners/diepVerseBanner.png" alt="" />
                     </a>
                 </div>
             </div>
