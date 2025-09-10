@@ -32,7 +32,7 @@ export const themes = ["light", "dark"] as const;
 export type Theme = typeof themes[number];
 
 function AppInner() {
-  const { playerCount } = useLBData()
+  const { playerCountByPlatform } = useLBData()
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>("pc")
   const [selectedSort, setSelectedSort] = useState<Sort>("alphabetical")
   const [selectedPage, setSelectedPage] = useState<Page>("lobby-grid")
@@ -107,7 +107,7 @@ function AppInner() {
           setActiveOption={setSelectedSort}
         />
         <div id="player-count">
-          <NumberCounter value={playerCount}/> Total Players Online
+          <NumberCounter value={playerCountByPlatform[selectedPlatform] ?? 0}/> Players Online ({selectedPlatform})
         </div>
         <IconSelector
           options={pages.map(page => ({key: page, iconURL: `${publicFileRoot}/assets/icons/page-${page}.svg`}))}

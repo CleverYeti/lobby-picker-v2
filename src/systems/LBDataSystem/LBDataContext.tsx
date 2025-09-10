@@ -47,12 +47,14 @@ interface LBDataContextType {
   }>
   availableLobbies: Array<Lobby>,
   playerCount: number,
+  playerCountByPlatform: Record<Platform, number>,
 }
 
 const LBDataContext = createContext<LBDataContextType>({
   LBData: [],
   availableLobbies: [],
-  playerCount: 0
+  playerCount: 0,
+  playerCountByPlatform: Object.fromEntries(platforms.map((platform) => ([platform, 0]))) as Record<Platform, number>
 });
 
 export function LBDataProvider({ children }: { children: ReactNode }) {
@@ -90,10 +92,12 @@ export function LBDataProvider({ children }: { children: ReactNode }) {
   const availableLobbies: LBDataContextType["availableLobbies"] = []
 
   let playerCount = 0
+  let playerCountByPlatform = Object.fromEntries(platforms.map((platform) => ([platform, 0]))) as Record<Platform, number>
 
   for (let platform of LBData) {
     if (platform.data == null) continue
     playerCount += platform.playerCount
+    playerCountByPlatform[platform.platform] = platform.playerCount
     for (let region of platform.data.regions) {
       for (let lobby of region.lobbies) {
         availableLobbies.push({
@@ -109,7 +113,7 @@ export function LBDataProvider({ children }: { children: ReactNode }) {
 
 
   return (
-    <LBDataContext.Provider value={{ LBData, availableLobbies, playerCount }}>
+    <LBDataContext.Provider value={{ LBData, availableLobbies, playerCount, playerCountByPlatform }}>
       {children}
     </LBDataContext.Provider>
   );
