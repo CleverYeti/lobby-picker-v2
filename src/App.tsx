@@ -48,13 +48,11 @@ function AppInner() {
       setSelectedLobby(lobby)
     } else {
       // main format
-      /*
       const link = (lobby.platform == "mobile" ? baseMobileGameURL : baseGameURL) + "?" + new URLSearchParams({
         s: lobby.ip,
         g: lobby.gamemode,
         ...(team != null ? {l: `0x${team}`} : {})
       })
-      */
       const params: PushPlayerStatEndpointParams = {
         gamemodeID: getGamemodeID(lobby.gamemode),
         regionID: getRegionID(lobby.region),
@@ -62,25 +60,23 @@ function AppInner() {
         environmentID: getEnvironmentID(lobby.platform),
         teamID: team,
         isCodepen: window.location.href.includes("cdpn") || window.location.href.includes("codepen")
+      }
+      ;(async () => {
+        try {
+          const response = await fetch(pushStatAPIURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(params)
+          })
+          if (!response.ok) throw new Error();
+        } catch (error) {
+          console.error("failed to push to stats", error)
         }
-        ;(async () => {
-          try {
-            const response = await fetch(pushStatAPIURL, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-                },
-                body: JSON.stringify(params)
-                })
-                if (!response.ok) throw new Error();
-                } catch (error) {
-                  console.error("failed to push to stats", error)
-                  }
-                  })()
-      /* prod
-                  window.open(link, "_blank")
-      */
-
+      })()
+      window.open(link, "_blank")
+      /* beta format
       const decodedLobby = [
         lobby.region,
         lobby.gamemode,
@@ -92,6 +88,7 @@ function AppInner() {
       const encodedLobby = encodeURI(decodedLobby.join("_"))
       const link =  baseGameURL + "?lobby=" + encodedLobby
       window.open(link, "_blank")
+      */
     }
   }
 
