@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { LBAPIURL, refreshInterval } from "../../config";
+import { LBAPIURL, otherLBAPIURL, refreshInterval } from "../../config";
 
 export const platforms = ["pc", "mobile"] as const;
 export type Platform = typeof platforms[number];
@@ -63,6 +63,22 @@ export function LBDataProvider({ children }: { children: ReactNode }) {
   async function fetchLBData(platform: Platform) {
     try {
       const response = await fetch(LBAPIURL + platform)
+      if (!response.ok) {
+        const text = await response.text()
+        throw new Error(text.startsWith("<!DOCTYPE html>") ? response.statusText : text)
+      }
+      const data = (await response.json()) as LoadBalancingResponse
+      const playerCount = data.regions.reduce((regionSum, region) => regionSum + region.lobbies.reduce((lobbySum, lobby) => lobbySum + lobby.numPlayers , 0), 0)
+      setLBData(prev => ([
+        ...prev.filter(entry => entry.platform != platform),
+        {platform, timestamp: Date.now(), data, playerCount}
+      ]))
+      return
+    } catch (error) {
+      console.warn("fetch error: " + error)
+    }
+    try {
+      const response = await fetch(otherLBAPIURL + platform)
       if (!response.ok) {
         const text = await response.text()
         throw new Error(text.startsWith("<!DOCTYPE html>") ? response.statusText : text)
