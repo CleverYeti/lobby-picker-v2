@@ -49,8 +49,8 @@ export function MainPage({
             <div className="partner-section">
                 <div className="partners-title">Check out our other projects:</div>
                 <div className="partner-links">
-                    <a className="partner-banner" href="https://diepeditor.io" target="_blank">
-                        <img src="https://dieplobbypicker.io/assets/partners/diepEditorBanner.png" alt="" />
+                    <a className="partner-banner" href="https://tankeditor.io" target="_blank">
+                        <img src="https://dieplobbypicker.io/assets/partners/tankEditorBanner.png" alt="" />
                     </a>
                     <a className="partner-banner" href="https://diepWiki.io" target="_blank">
                         <img src="https://dieplobbypicker.io/assets/partners/diepWikiBanner.png" alt="" />
