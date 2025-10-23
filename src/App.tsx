@@ -48,6 +48,7 @@ function AppInner() {
       setSelectedLobby(lobby)
     } else {
       // main format
+      /*
       const link = (lobby.platform == "mobile" ? baseMobileGameURL : baseGameURL) + "?" + new URLSearchParams({
         s: lobby.ip,
         g: lobby.gamemode,
@@ -76,19 +77,27 @@ function AppInner() {
         }
       })()
       window.open(link, "_blank")
-      /* beta format
+      */
+      /* beta format */
+
+      const randomIDs: Record<string, number> = { // idk where these come from and they probably change every update
+        "atl": 62717,
+        "fra": 25225,
+        "sgp": 31220,
+        "syd": 43127
+      }
+
       const decodedLobby = [
         lobby.region,
         lobby.gamemode,
         lobby.ip,
-        "x",
+        team != null ? randomIDs[lobby.region] : "x",
         (team ?? "x") + "",
       ]
   
       const encodedLobby = encodeURI(decodedLobby.join("_"))
       const link =  baseGameURL + "?lobby=" + encodedLobby
       window.open(link, "_blank")
-      */
     }
   }
 

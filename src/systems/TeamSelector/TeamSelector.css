@@ -111,7 +111,9 @@ body[data-theme="dark"] #teamSelector > .title {
 #teamSelector > #teamGrid > .team[data-team-position="bottom-left"] { transform-origin: top right; --arrow-rotation: 135deg; }
 #teamSelector > #teamGrid > .team[data-team-position="bottom-right"] { transform-origin: top left; --arrow-rotation: 45deg; }
 
+/*
 #teamSelector > #teamGrid > .team[data-team-id="0"] { background: var(--color-1);}
 #teamSelector > #teamGrid > .team[data-team-id="1"] { background: var(--color-3);}
 #teamSelector > #teamGrid > .team[data-team-id="2"] { background: var(--color-6);}
 #teamSelector > #teamGrid > .team[data-team-id="3"] { background: var(--color-2);}
+*/
