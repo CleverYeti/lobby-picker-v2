@@ -7,7 +7,7 @@ import { GraphsPage } from "./GraphsPage/GraphsPage"
 import { MainPage } from "./MainPage/MainPage"
 import { TeamSelector } from "./systems/TeamSelector/TeamSelector"
 import { gamemodeInfo } from "./gamemodeInfo"
-import { publicFileRoot, baseGameURL, baseMobileGameURL, pushStatAPIURL } from "./config"
+import { publicFileRoot, baseGameURL, baseMobileGameURL, pushStatAPIURL, gameIDs } from "./config"
 import { PushPlayerStatEndpointParams } from "./DataTypes/pushPlayerStatTypes"
 import { getGamemodeID, getGamemodeNameID } from "./DataTypes/Gamemodes"
 import { getRegionID } from "./DataTypes/Regions"
@@ -80,18 +80,13 @@ function AppInner() {
       */
       /* beta format */
 
-      const randomIDs: Record<string, number> = { // idk where these come from and they probably change every update
-        "atl": 62717,
-        "fra": 25225,
-        "sgp": 31220,
-        "syd": 43127
-      }
+      
 
       const decodedLobby = [
         lobby.region,
         lobby.gamemode,
         lobby.ip,
-        team != null ? randomIDs[lobby.region] : "x",
+        team != null ? (gameIDs[lobby.ip] ?? "x") : "x",
         (team ?? "x") + "",
       ]
   
