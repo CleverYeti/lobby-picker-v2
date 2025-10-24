@@ -9,12 +9,14 @@ export function MainPage({
     selectedPlatform,
     selectedSort,
     isActive,
-    joinLobby
+    getLobbyButtonLink,
+    getLobbyButtonFunction
 }: {
     selectedPlatform: Platform,
     selectedSort: Sort,
     isActive: boolean,
-    joinLobby: (lobby: Lobby, team?: number) => void
+    getLobbyButtonLink: (lobby: Lobby, team?: number) => string|undefined
+    getLobbyButtonFunction: (lobby: Lobby, team?: number) => ((event: React.MouseEvent) => void)|undefined
 }) {
     const { availableLobbies } = useLBData()
     let filteredLobbies = availableLobbies.filter(lobby => lobby.platform == selectedPlatform)
@@ -37,10 +39,15 @@ export function MainPage({
                         <div className="name">{gamemode.name}</div>
                         <div className="lobbygrid">
                             {filteredLobbies.filter(lobby => lobby.gamemode == gamemodeKey).map((lobby, i) => (
-                                <div className="lobby" key={i} onClick={() => joinLobby(lobby)}>
+                                <a
+                                    className="lobby"
+                                    key={i}
+                                    onClick={getLobbyButtonFunction(lobby, undefined)}
+                                    href={getLobbyButtonLink(lobby, undefined)}
+                                >
                                     <div className="region">{lobby.region}</div>
                                     <div className="player-count"><NumberCounter value={lobby.numPlayers}/></div>
-                                </div>
+                                </a>
                             ))}
                         </div>
                     </div>

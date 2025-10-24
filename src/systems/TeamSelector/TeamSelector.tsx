@@ -7,11 +7,13 @@ import { publicFileRoot } from "../../config";
 export function TeamSelector({
     selectedLobby,
     closeFunction,
-    joinLobby
+    getLobbyButtonLink,
+    getLobbyButtonFunction
 }: {
     selectedLobby: Lobby|null;
     closeFunction: () => void
-    joinLobby: (lobby: Lobby, team?: number) => void
+    getLobbyButtonLink: (lobby: Lobby, team?: number) => string|undefined
+    getLobbyButtonFunction: (lobby: Lobby, team?: number) => ((event: React.MouseEvent) => void)|undefined
 }) {
     const [animatingLobby, setAnimatingLobby] = useState<Lobby|null>(null)
     if (selectedLobby != null && selectedLobby != animatingLobby) setAnimatingLobby(selectedLobby)
@@ -34,13 +36,61 @@ export function TeamSelector({
             </div>
             <div id="teamGrid">
                 {gamemodeInfo[animatingLobby?.gamemode ?? ""]?.teamCount == 4 ? (<>
-                    <div className="team" data-team-id={0} data-team-position="top-left"     onClick={() => selectedLobby != null && joinLobby(selectedLobby, 0)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
-                    <div className="team" data-team-id={2} data-team-position="top-right"    onClick={() => selectedLobby != null && joinLobby(selectedLobby, 2)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
-                    <div className="team" data-team-id={3} data-team-position="bottom-left"  onClick={() => selectedLobby != null && joinLobby(selectedLobby, 3)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
-                    <div className="team" data-team-id={1} data-team-position="bottom-right" onClick={() => selectedLobby != null && joinLobby(selectedLobby, 1)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
+                    <a
+                        className="team"
+                        data-team-id={0}
+                        data-team-position="top-left"
+                        href={selectedLobby != null ? getLobbyButtonLink(selectedLobby, 0) : undefined}
+                        onClick={selectedLobby != null ? getLobbyButtonFunction(selectedLobby, 0) : undefined}
+                    >
+                        <img src={`${publicFileRoot}/assets/team-arrow.svg`}/>
+                    </a>
+                    <a
+                        className="team"
+                        data-team-id={2}
+                        data-team-position="top-right"
+                        href={selectedLobby != null ? getLobbyButtonLink(selectedLobby, 2) : undefined}
+                        onClick={selectedLobby != null ? getLobbyButtonFunction(selectedLobby, 2) : undefined}
+                    >
+                        <img src={`${publicFileRoot}/assets/team-arrow.svg`}/>
+                    </a>
+                    <a
+                        className="team"
+                        data-team-id={3}
+                        data-team-position="bottom-left"
+                        href={selectedLobby != null ? getLobbyButtonLink(selectedLobby, 3) : undefined}
+                        onClick={selectedLobby != null ? getLobbyButtonFunction(selectedLobby, 3) : undefined}
+                    >
+                        <img src={`${publicFileRoot}/assets/team-arrow.svg`}/>
+                    </a>
+                    <a
+                        className="team"
+                        data-team-id={1}
+                        data-team-position="bottom-right"
+                        href={selectedLobby != null ? getLobbyButtonLink(selectedLobby, 1) : undefined}
+                        onClick={selectedLobby != null ? getLobbyButtonFunction(selectedLobby, 1) : undefined}
+                    >
+                        <img src={`${publicFileRoot}/assets/team-arrow.svg`}/>
+                    </a>
                 </>):(<>
-                    <div className="team" data-team-id={0} data-team-position="left"  onClick={() => selectedLobby != null && joinLobby(selectedLobby, 0)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
-                    <div className="team" data-team-id={1} data-team-position="right" onClick={() => selectedLobby != null && joinLobby(selectedLobby, 1)}> <img src={`${publicFileRoot}/assets/team-arrow.svg`}/> </div>
+                    <a
+                        className="team"
+                        data-team-id={0}
+                        data-team-position="left"
+                        href={selectedLobby != null ? getLobbyButtonLink(selectedLobby, 0) : undefined}
+                        onClick={selectedLobby != null ? getLobbyButtonFunction(selectedLobby, 0) : undefined}
+                    >
+                        <img src={`${publicFileRoot}/assets/team-arrow.svg`}/>
+                    </a>
+                    <a
+                        className="team"
+                        data-team-id={1}
+                        data-team-position="right"
+                        href={selectedLobby != null ? getLobbyButtonLink(selectedLobby, 1) : undefined}
+                        onClick={selectedLobby != null ? getLobbyButtonFunction(selectedLobby, 1) : undefined}
+                    >
+                        <img src={`${publicFileRoot}/assets/team-arrow.svg`}/>
+                    </a>
                 </>)}
             </div>
         </div>

@@ -42,46 +42,31 @@ function AppInner() {
   document.body.dataset.theme = selectedTheme
   localStorage.setItem("theme", selectedTheme)
 
-  function joinLobby(lobby: Lobby, team?: number) {
+  function getLobbyButtonLink(lobby: Lobby, team?: number): string|undefined {
     const gamemode = gamemodeInfo[lobby.gamemode]
     if ((gamemode?.teamCount ?? 0) > 0 && team == undefined) {
-      setSelectedLobby(lobby)
-    } else {
-      // main format
-      /*
-      const link = (lobby.platform == "mobile" ? baseMobileGameURL : baseGameURL) + "?" + new URLSearchParams({
-        s: lobby.ip,
-        g: lobby.gamemode,
-        ...(team != null ? {l: `0x${team}`} : {})
-      })
-      const params: PushPlayerStatEndpointParams = {
-        gamemodeID: getGamemodeID(lobby.gamemode),
-        regionID: getRegionID(lobby.region),
-        gamemodeNameID: getGamemodeNameID(lobby.gamemodeName),
-        environmentID: getEnvironmentID(lobby.platform),
-        teamID: team,
-        isCodepen: window.location.href.includes("cdpn") || window.location.href.includes("codepen")
-      }
-      ;(async () => {
-        try {
-          const response = await fetch(pushStatAPIURL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(params)
-          })
-          if (!response.ok) throw new Error();
-        } catch (error) {
-          console.error("failed to push to stats", error)
-        }
-      })()
-      window.open(link, "_blank")
-      */
-      /* beta format */
+      return undefined
+    }
+    const decodedLobby = [
+      lobby.region,
+      lobby.gamemode,
+      lobby.ip,
+      team != null ? (gameIDs[lobby.ip] ?? "x") : "x",
+      (team ?? "x") + "",
+    ]
 
-      
-
+    const encodedLobby = encodeURI(decodedLobby.join("_"))
+    const link =  baseGameURL + "?lobby=" + encodedLobby
+    return link
+  }
+  
+  function getLobbyButtonFunction(lobby: Lobby, team?: number): ((event: React.MouseEvent) => void)|undefined {
+    const gamemode = gamemodeInfo[lobby.gamemode]
+    if ((gamemode?.teamCount ?? 0) > 0 && team == undefined) {
+      return () => setSelectedLobby(lobby)
+    }
+    return (event: React.MouseEvent) => {
+      event.preventDefault();
       const decodedLobby = [
         lobby.region,
         lobby.gamemode,
@@ -92,7 +77,26 @@ function AppInner() {
   
       const encodedLobby = encodeURI(decodedLobby.join("_"))
       const link =  baseGameURL + "?lobby=" + encodedLobby
-      window.open(link, "_blank")
+      window.open(link, "_blank") 
+    }
+  }
+
+  function joinLobby(lobby: Lobby, isMiddleClick: boolean, team?: number) {
+    const gamemode = gamemodeInfo[lobby.gamemode]
+    if ((gamemode?.teamCount ?? 0) > 0 && team == undefined) {
+      setSelectedLobby(lobby)
+    } else {
+      const decodedLobby = [
+        lobby.region,
+        lobby.gamemode,
+        lobby.ip,
+        team != null ? (gameIDs[lobby.ip] ?? "x") : "x",
+        (team ?? "x") + "",
+      ]
+  
+      const encodedLobby = encodeURI(decodedLobby.join("_"))
+      const link =  baseGameURL + "?lobby=" + encodedLobby
+      window.open(link, "_blank") 
     }
   }
 
@@ -133,13 +137,15 @@ function AppInner() {
       <MainPage
         selectedPlatform={selectedPlatform}
         selectedSort={selectedSort}
-        joinLobby={joinLobby}
+        getLobbyButtonLink={getLobbyButtonLink}
+        getLobbyButtonFunction={getLobbyButtonFunction}
         isActive={selectedPage == "lobby-grid"}
       />
       <TeamSelector
         selectedLobby={selectedLobby}
         closeFunction={() => setSelectedLobby(null)}
-        joinLobby={joinLobby}
+        getLobbyButtonLink={getLobbyButtonLink}
+        getLobbyButtonFunction={getLobbyButtonFunction}
       />
     </div>
   )
