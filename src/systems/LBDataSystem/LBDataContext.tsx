@@ -70,9 +70,9 @@ export function LBDataProvider({ children }: { children: ReactNode }) {
       }
       const data = (await response.json()) as LoadBalancingResponse
       for (let region of data.regions) {
-        const perLobbySubract = Math.round(60 / region.lobbies.length)
+        const fakePlayersPerLobby = Math.floor(60 / region.lobbies.length)
         for (let lobby of region.lobbies) {
-          lobby.numPlayers -= perLobbySubract;
+          lobby.numPlayers -= fakePlayersPerLobby;
         }
       }
       const playerCount = data.regions.reduce((regionSum, region) => regionSum + region.lobbies.reduce((lobbySum, lobby) => lobbySum + lobby.numPlayers, 0), 0)
