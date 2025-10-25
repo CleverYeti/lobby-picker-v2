@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { LBAPIURL, otherLBAPIURL, refreshInterval } from "../../config";
+import { regions } from "../../DataTypes/Regions";
 
 export const platforms = ["pc", "mobile"] as const;
 export type Platform = typeof platforms[number];
@@ -68,7 +69,13 @@ export function LBDataProvider({ children }: { children: ReactNode }) {
         throw new Error(text.startsWith("<!DOCTYPE html>") ? response.statusText : text)
       }
       const data = (await response.json()) as LoadBalancingResponse
-      const playerCount = data.regions.reduce((regionSum, region) => regionSum + region.lobbies.reduce((lobbySum, lobby) => lobbySum + lobby.numPlayers , 0), 0)
+      for (let region of data.regions) {
+        const perLobbySubract = Math.round(60 / region.lobbies.length)
+        for (let lobby of region.lobbies) {
+          lobby.numPlayers -= perLobbySubract;
+        }
+      }
+      const playerCount = data.regions.reduce((regionSum, region) => regionSum + region.lobbies.reduce((lobbySum, lobby) => lobbySum + lobby.numPlayers, 0), 0)
       setLBData(prev => ([
         ...prev.filter(entry => entry.platform != platform),
         {platform, timestamp: Date.now(), data, playerCount}

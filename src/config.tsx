@@ -24,3 +24,5 @@ export const gameIDs: Record<string, number> = { // idk where these come from an
   "sgp-97b904129f583cef.diep.io:2003": 31220, // sgp 4tdm
   "syd-c33a430721f75586.diep.io:2003": 43127, // syd 4tdm
 }
+
+export const compensatePlayerCounts = true;
