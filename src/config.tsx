@@ -11,6 +11,7 @@ export const publicFileRoot = "https://dieplobbypicker.io" //""
 
 export const gameIDs: Record<string, number> = { // idk where these come from and they probably change every update
   "atl-fc83e7c455d1cbec.diep.io:2006": 63933,
+  "atl-fc83e7c455d1cbec.diep.io:2001": 28543,
   //"atl-fc83e7c455d1cbec.diep.io:2007": 57903, // atl 2tdm 1
   //"atl-fc83e7c455d1cbec.diep.io:2001": 33579, // atl 2tdm 2
   "fra-43ce658e19c456d0.diep.io:2001": 25225, // fra 2tdm
