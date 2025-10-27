@@ -11,14 +11,15 @@ export const publicFileRoot = "https://dieplobbypicker.io" //""
 
 export const gameIDs: Record<string, number> = {
   "atl-fc83e7c455d1cbec.diep.io:2001": 52867, // atl 2tdm
+  "atl-fc83e7c455d1cbec.diep.io:2007": 29901, // atl 2tdm
   "atl-fc83e7c455d1cbec.diep.io:2003": 52867, // atl 4tdm
-  
+  "atl-fc83e7c455d1cbec.diep.io:2006": 39372, // atl 4tdm
+
   "fra-43ce658e19c456d0.diep.io:2001": 65942, // fra 2tdm
   "fra-43ce658e19c456d0.diep.io:2003": 52867, // fra 4tdm
 
   "sgp-97b904129f583cef.diep.io:2001": 40904, // sgp 2tdm
   "sgp-97b904129f583cef.diep.io:2003": 40904, // sgp 4tdm
-  
   "syd-c33a430721f75586.diep.io:2001": 40904, // syd 2tdm
   "syd-c33a430721f75586.diep.io:2003": 40904, // syd 4tdm
 }
