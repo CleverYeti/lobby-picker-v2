@@ -25,3 +25,5 @@ export const gameIDs: Record<string, number> = {
 }
 
 export const compensatePlayerCounts = true;
+
+export const enableTeamSelection = false;

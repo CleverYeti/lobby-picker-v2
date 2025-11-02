@@ -7,7 +7,7 @@ import { GraphsPage } from "./GraphsPage/GraphsPage"
 import { MainPage } from "./MainPage/MainPage"
 import { TeamSelector } from "./systems/TeamSelector/TeamSelector"
 import { gamemodeInfo } from "./gamemodeInfo"
-import { publicFileRoot, baseGameURL, baseMobileGameURL, pushStatAPIURL, gameIDs } from "./config"
+import { publicFileRoot, baseGameURL, baseMobileGameURL, pushStatAPIURL, gameIDs, enableTeamSelection } from "./config"
 import { PushPlayerStatEndpointParams } from "./DataTypes/pushPlayerStatTypes"
 import { getGamemodeID, getGamemodeNameID } from "./DataTypes/Gamemodes"
 import { getRegionID } from "./DataTypes/Regions"
@@ -44,7 +44,7 @@ function AppInner() {
 
   function getLobbyButtonLink(lobby: Lobby, team?: number): string|undefined {
     const gamemode = gamemodeInfo[lobby.gamemode]
-    if ((gamemode?.teamCount ?? 0) > 0 && team == undefined) {
+    if ((gamemode?.teamCount ?? 0) > 0 && team == undefined && enableTeamSelection) {
       return undefined
     }
     const decodedLobby = [
@@ -62,7 +62,7 @@ function AppInner() {
   
   function getLobbyButtonFunction(lobby: Lobby, team?: number): ((event: React.MouseEvent) => void)|undefined {
     const gamemode = gamemodeInfo[lobby.gamemode]
-    if ((gamemode?.teamCount ?? 0) > 0 && team == undefined) {
+    if ((gamemode?.teamCount ?? 0) > 0 && team == undefined && enableTeamSelection) {
       return () => setSelectedLobby(lobby)
     }
     return (event: React.MouseEvent) => {
