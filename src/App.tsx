@@ -56,7 +56,7 @@ function AppInner() {
     ]
 
     const encodedLobby = encodeURI(decodedLobby.join("_"))
-    const link =  baseGameURL + "?lobby=" + encodedLobby
+    const link = (selectedPlatform == "mobile" ? baseMobileGameURL : baseGameURL) + "?lobby=" + encodedLobby
     return link
   }
   
@@ -76,7 +76,7 @@ function AppInner() {
       ]
   
       const encodedLobby = encodeURI(decodedLobby.join("_"))
-      const link =  baseGameURL + "?lobby=" + encodedLobby
+      const link = (selectedPlatform == "mobile" ? baseMobileGameURL : baseGameURL) + "?lobby=" + encodedLobby
       window.open(link, "_blank") 
     }
   }
