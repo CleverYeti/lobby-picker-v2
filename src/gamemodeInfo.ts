@@ -31,7 +31,7 @@ export const gamemodeInfo: {
     "event": {
         sortIndex: 4,
         colorIndex: 4,
-        name: "Event"
+        name: "Event / CTF"
     },
     "sandbox": {
         sortIndex: 5,
