@@ -38,7 +38,7 @@ export function MainPage({
                     <div className="gamemode" key={gamemodeKey} style={{"--color": `var(--color-${gamemode.colorIndex + 1})`} as React.CSSProperties}>
                         <div className="name">{gamemode.name}</div>
                         <div className="lobbygrid">
-                            {filteredLobbies.filter(lobby => lobby.gamemode == gamemodeKey).map((lobby, i) => (
+                            {filteredLobbies.filter(lobby => lobby.gamemode == gamemodeKey || lobby.gamemode == "ctf" && gamemodeKey == "event").map((lobby, i) => (
                                 <a
                                     className="lobby"
                                     key={i}
